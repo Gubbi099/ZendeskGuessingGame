@@ -1,16 +1,18 @@
 import React from "react";
 import "./MyButton.css";
 class MyButton extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {};
+  }
+
   render() {
     const clicked = evt => {
-      if (this.props.label == "No input") {
-        alert(this.props.label);
-      }
+      this.setState({ isActive: !this.state.isActive });
     };
-    const label = this.props.label;
     return (
       <div className="MyButton" onClick={clicked}>
-        {label}
+        {this.props.label} {this.state.isActive ? "On" : "Off"}
       </div>
     );
   }

@@ -1,7 +1,7 @@
-import React, { Component } from 'react';
-import logo from './logo.svg';
-import './App.css';
-import MyButton from './MyButton.js';
+import React, { Component } from "react";
+import logo from "./logo.svg";
+import "./App.css";
+import MyButton from "./MyButton.js";
 
 class App extends Component {
   render() {
@@ -14,8 +14,11 @@ class App extends Component {
           </p>
 
           <MyButton />
-
-          <MyButton label="Rasmus"/>
+          <MyButton />
+          <MyButton />
+          <MyButton />
+          <MyButton />
+          <MyButton label="Rasmus" />
           <a
             className="App-link"
             href="https://reactjs.org"
