@@ -13,24 +13,27 @@
 
 .card .back,
 .card .front {
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
   position: absolute;
   top: 0;
   left: 0;
   border-radius: 22px;
   width: 100%;
   height: 100%;
-  background-size: contain;
 }
 
 .back {
   transition: transform 1s, opacity 1s;
   background-image: url(https://images.cdn2.stockunlimited.net/preview1300/playing-cards-background_1608080.jpg);
   transform: rotate3d(0, 1, 0, 180deg);
+  background-size: contain;
 }
 
 .front {
   transition: transform 1s, opacity 1s;
-  background: orange;
+  /* background: orange; */
+  background-size: cover;
+  background-position: center;
   transform: rotate3d(0, 0, 0, 180deg);
   opacity: 0;
 }
@@ -46,9 +49,10 @@
 }
 
 .card:hover {
-  transition: width 0.1s, height 0.1s;
-  width: 195px;
-  height: 345px;
+  transition: transform 0.3s;
+  transform: scale(0.95, 0.95);
+  /* width: 195px;
+  height: 345px; */
   background-blend-mode: lighten;
   cursor: pointer;
 }

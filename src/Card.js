@@ -6,7 +6,10 @@ class Card extends React.Component {
 
     return (
       <div className={className} onClick={this.props.onClick}>
-        <div className="front" />
+        <div
+          className="front"
+          style={{ backgroundImage: `url(${this.props.image})` }}
+        />
         <div className="back" />
       </div>
     );
