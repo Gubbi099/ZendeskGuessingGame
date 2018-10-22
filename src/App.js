@@ -8,30 +8,30 @@ class App extends Component {
 
     const cards = [
       {
-        id: 1,
+        pairid: 1,
         flipped: false,
         imgUrl:
           "https://4awcmd1th3m1scfs83pxlvbh-wpengine.netdna-ssl.com/wp-content/uploads/2017/10/seedless-watermelon.jpg"
       },
       {
-        id: 2,
+        pairid: 2,
         flipped: false,
         imgUrl:
           "https://preview.redd.it/de21lu265zk01.png?width=454&auto=webp&s=d7859a02c4b84bca2647f11cc6fe2c5000e8d76f"
       },
       {
-        id: 3,
+        pairid: 3,
         flipped: false,
         imgUrl: "https://media.giphy.com/media/zK3R40EPmQk9y/source.gif"
       },
       {
-        id: 4,
+        pairid: 4,
         flipped: false,
         imgUrl:
           "http://en.bcdn.biz/images/emails_source/3a890069-edfb-4ceb-ab29-9a1b6fb206cf.jpg"
       },
       {
-        id: 5,
+        pairid: 5,
         flipped: false,
         imgUrl:
           "https://animals.sandiegozoo.org/sites/default/files/2016-08/category-thumbnail-mammals_0.jpg"
@@ -41,14 +41,44 @@ class App extends Component {
       return { ...card, uniqueId: index };
     });
 
+    console.log(allcards);
+
     this.state = {
-      cards: _.shuffle(allcards)
+      cards: _.shuffle(allcards),
+      currentSelectedCard: undefined
     };
   }
-  onCardClicked(id) {
+
+  reset = () => {
+    this.setState({
+      currentSelectedCard: undefined,
+      cards: this.state.cards.map(card => {
+        return { ...card, flipped: false };
+      })
+    });
+  };
+
+  onCardClicked(clickedCard) {
+    const { currentSelectedCard } = this.state;
+
+    if (currentSelectedCard !== undefined) {
+      if (
+        currentSelectedCard.pairid === clickedCard.pairid &&
+        currentSelectedCard.uniqueId !== clickedCard.uniqueId
+      ) {
+        setTimeout(() => alert("Yes!"), 1000);
+      } else {
+        setTimeout(this.reset, 1000);
+      }
+    } else {
+      this.setState({
+        currentSelectedCard: clickedCard
+      });
+    }
+
     this.setState({
       cards: this.state.cards.map(card => {
-        if (card.uniqueId === id) {
+        if (card.uniqueId === clickedCard.uniqueId) {
           return { ...card, flipped: !card.flipped };
         } else {
           return card;
@@ -65,7 +95,7 @@ class App extends Component {
             <Card
               key={card.uniqueId}
               onClick={() => {
-                this.onCardClicked(card.uniqueId);
+                this.onCardClicked(card);
               }}
               flipped={card.flipped}
               image={card.imgUrl}
