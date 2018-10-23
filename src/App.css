@@ -19,13 +19,27 @@
 }
 
 .cards {
+  height: 100%;
+  margin-top: 60px;
   max-width: 2000px;
   display: flex;
   justify-content: center;
   flex-wrap: wrap;
 }
 
+.button {
+  cursor: pointer;
+  background: rgb(150, 150, 150);
+  margin-left: -95px;
+  margin-top: 200px;
+  user-select: none;
+  border-radius: 10px;
+  width: 100px;
+  height: 50px;
+}
+
 .winScreen {
+  border-radius: 0px 0px 5px 5px;
   justify-content: center;
   text-align: center;
   display: flex;
@@ -36,7 +50,7 @@
   height: 350px;
   z-index: 100;
   animation-name: slide-in;
-  animation-duration: 2s;
+  animation-duration: 1.5s;
   animation-fill-mode: forwards;
 }
 

@@ -7,7 +7,7 @@ class App extends Component {
   constructor(props) {
     super(props);
 
-    const themes = ["animals", "cars", "nature", "city"];
+    const themes = ["cats", "cars", "nature", "city"];
     const theme = _.sample(themes);
     console.log(theme);
 
@@ -117,10 +117,19 @@ class App extends Component {
     return (
       <div className="App">
         <header className="turnHeader">
-          <div>Turns used: {this.state.turns} </div>{" "}
+          <div>Turns: {this.state.turns} </div>
           <div> Theme: {_.capitalize(this.state.theme)} </div>
         </header>
-        {this.state.hasWon ? <div className="winScreen">You have won</div> : ""}
+        {this.state.hasWon ? (
+          <div className="winScreen">
+            You have won
+            <button className="button" onClick={() => window.location.reload()}>
+              Retry
+            </button>
+          </div>
+        ) : (
+          ""
+        )}
         <div className="cards">
           {this.state.cards.map(card => {
             return (
