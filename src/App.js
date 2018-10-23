@@ -7,17 +7,19 @@ class App extends Component {
   constructor(props) {
     super(props);
 
+    const CARD_COUNT = 10;
+
     const themes = ["cats", "cars", "nature", "city", "zendesk"];
     const theme = _.sample(themes);
 
     let cards = [];
-    for (var i = 0; i < 2; i++) {
+    for (var i = 0; i < CARD_COUNT; i++) {
       cards = [
         ...cards,
         {
           pairid: i + 1,
           flipped: false,
-          imgUrl: `https://loremflickr.com/220/220/${theme}?lock=${i + 7}/`
+          imgUrl: `https://loremflickr.com/220/220/${theme}?lock=${i + 10}/`
         }
       ];
     }
@@ -31,7 +33,8 @@ class App extends Component {
       theme: theme,
       currentSelectedCard: undefined,
       turns: 0,
-      zoom: 0.85
+      zoom: 0.85,
+      maxTurns: CARD_COUNT * 2
     };
   }
 
@@ -41,6 +44,14 @@ class App extends Component {
     });
 
     this.setState({ hasWon: isEveryCardFlipped });
+
+    return isEveryCardFlipped;
+  };
+
+  hasLost = () => {
+    const lost = this.state.turns >= this.state.maxTurns - 1;
+
+    this.setState({ hasLost: lost });
   };
 
   endGame = () => {
@@ -89,7 +100,12 @@ class App extends Component {
   }
 
   async onCardClicked(clickedCard) {
-    if (clickedCard.flipped || this.state.isResetting) {
+    if (
+      clickedCard.flipped ||
+      this.state.isResetting ||
+      this.state.hasWon ||
+      this.state.hasLost
+    ) {
       return;
     }
 
@@ -109,9 +125,10 @@ class App extends Component {
           flipped: true
         });
 
-        this.hasWon();
+        this.hasWon() || this.hasLost();
         this.reset();
       } else {
+        this.hasLost();
         this.reset();
       }
     } else {
@@ -125,7 +142,9 @@ class App extends Component {
     return (
       <div className="App">
         <header className="turnHeader">
-          <div>Turns: {this.state.turns} </div>
+          <div>
+            Turns: {this.state.turns} / {this.state.maxTurns}
+          </div>
           <input
             value={this.state.zoom}
             type="range"
@@ -138,15 +157,14 @@ class App extends Component {
           />
           <div> Theme: {_.capitalize(this.state.theme)} </div>
         </header>
-        {this.state.hasWon ? (
+        {(this.state.hasWon || this.state.hasLost) && (
           <div className="winScreen">
-            You won!
+            {this.state.hasWon && "You won!"}
+            {this.state.hasLost && "You lost!"}
             <button className="button" onClick={this.endGame}>
               Retry
             </button>
           </div>
-        ) : (
-          ""
         )}
         <div className="cards" style={{ zoom: this.state.zoom }}>
           {this.state.cards.map(card => {
