@@ -122,7 +122,7 @@ class App extends Component {
         </header>
         {this.state.hasWon ? (
           <div className="winScreen">
-            You have won
+            You won!
             <button className="button" onClick={() => window.location.reload()}>
               Retry
             </button>
