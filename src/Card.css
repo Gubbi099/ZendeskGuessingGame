@@ -48,6 +48,11 @@
   opacity: 1;
 }
 
+.card.flipped:hover {
+  transform: none;
+  cursor: default;
+}
+
 .card:hover {
   transition: transform 0.3s;
   transform: scale(0.95, 0.95);

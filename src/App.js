@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import "./App.css";
 import Card from "./Card.js";
 import _ from "lodash";
+
 class App extends Component {
   constructor(props) {
     super(props);
@@ -51,40 +52,68 @@ class App extends Component {
 
   reset = () => {
     this.setState({
-      currentSelectedCard: undefined,
-      cards: this.state.cards.map(card => {
-        return { ...card, flipped: false };
-      })
+      isResetting: true
     });
+
+    setTimeout(() => {
+      this.setState({
+        currentSelectedCard: undefined,
+        cards: this.state.cards.map(card => {
+          return card.found ? card : { ...card, flipped: false };
+        })
+      });
+
+      setTimeout(() => {
+        this.setState({
+          isResetting: false
+        });
+      }, 100);
+    }, 1000);
   };
 
-  onCardClicked(clickedCard) {
+  updateCard(uniqueId, newCardData) {
+    return new Promise(resolve => {
+      this.setState(
+        {
+          cards: this.state.cards.map(
+            card =>
+              uniqueId === card.uniqueId ? { ...card, ...newCardData } : card
+          )
+        },
+        resolve
+      );
+    });
+  }
+
+  async onCardClicked(clickedCard) {
+    console.log(this.state.isResetting);
+    if (clickedCard.flipped || this.state.isResetting) {
+      return;
+    }
+
     const { currentSelectedCard } = this.state;
 
+    await this.updateCard(clickedCard.uniqueId, { flipped: true });
+
     if (currentSelectedCard !== undefined) {
-      if (
-        currentSelectedCard.pairid === clickedCard.pairid &&
-        currentSelectedCard.uniqueId !== clickedCard.uniqueId
-      ) {
-        setTimeout(() => alert("Yes!"), 1000);
+      if (currentSelectedCard.pairid === clickedCard.pairid) {
+        await this.updateCard(currentSelectedCard.uniqueId, {
+          found: true,
+          flipped: true
+        });
+        await this.updateCard(clickedCard.uniqueId, {
+          found: true,
+          flipped: true
+        });
+        this.reset();
       } else {
-        setTimeout(this.reset, 1000);
+        this.reset();
       }
     } else {
       this.setState({
         currentSelectedCard: clickedCard
       });
     }
-
-    this.setState({
-      cards: this.state.cards.map(card => {
-        if (card.uniqueId === clickedCard.uniqueId) {
-          return { ...card, flipped: !card.flipped };
-        } else {
-          return card;
-        }
-      })
-    });
   }
 
   render() {
