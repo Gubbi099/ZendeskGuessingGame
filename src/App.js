@@ -7,37 +7,18 @@ class App extends Component {
   constructor(props) {
     super(props);
 
-    const cards = [
-      {
-        pairid: 1,
-        flipped: false,
-        imgUrl:
-          "https://4awcmd1th3m1scfs83pxlvbh-wpengine.netdna-ssl.com/wp-content/uploads/2017/10/seedless-watermelon.jpg"
-      },
-      {
-        pairid: 2,
-        flipped: false,
-        imgUrl:
-          "https://preview.redd.it/de21lu265zk01.png?width=454&auto=webp&s=d7859a02c4b84bca2647f11cc6fe2c5000e8d76f"
-      },
-      {
-        pairid: 3,
-        flipped: false,
-        imgUrl: "https://media.giphy.com/media/zK3R40EPmQk9y/source.gif"
-      },
-      {
-        pairid: 4,
-        flipped: false,
-        imgUrl:
-          "http://en.bcdn.biz/images/emails_source/3a890069-edfb-4ceb-ab29-9a1b6fb206cf.jpg"
-      },
-      {
-        pairid: 5,
-        flipped: false,
-        imgUrl:
-          "https://animals.sandiegozoo.org/sites/default/files/2016-08/category-thumbnail-mammals_0.jpg"
-      }
-    ];
+    let cards = [];
+    for (var i = 0; i < 6; i++) {
+      cards = [
+        ...cards,
+        {
+          pairid: i + 1,
+          flipped: false,
+          imgUrl: `https://loremflickr.com/250/350/animals?lock=${i}/`
+        }
+      ];
+    }
+
     const allcards = [...cards, ...cards].map((card, index) => {
       return { ...card, uniqueId: index };
     });
@@ -46,13 +27,15 @@ class App extends Component {
 
     this.state = {
       cards: _.shuffle(allcards),
-      currentSelectedCard: undefined
+      currentSelectedCard: undefined,
+      turns: 0
     };
   }
 
   reset = () => {
     this.setState({
-      isResetting: true
+      isResetting: true,
+      turns: this.state.turns + 1
     });
 
     setTimeout(() => {
@@ -86,7 +69,7 @@ class App extends Component {
   }
 
   async onCardClicked(clickedCard) {
-    console.log(this.state.isResetting);
+    console.log(this.state.turns);
     if (clickedCard.flipped || this.state.isResetting) {
       return;
     }
@@ -119,18 +102,21 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        {this.state.cards.map(card => {
-          return (
-            <Card
-              key={card.uniqueId}
-              onClick={() => {
-                this.onCardClicked(card);
-              }}
-              flipped={card.flipped}
-              image={card.imgUrl}
-            />
-          );
-        })}
+        <header className="turnHeader">Turns used: {this.state.turns}</header>
+        <div className="cards">
+          {this.state.cards.map(card => {
+            return (
+              <Card
+                key={card.uniqueId}
+                onClick={() => {
+                  this.onCardClicked(card);
+                }}
+                flipped={card.flipped}
+                image={card.imgUrl}
+              />
+            );
+          })}
+        </div>
       </div>
     );
   }

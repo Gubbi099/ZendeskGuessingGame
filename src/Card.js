@@ -10,7 +10,14 @@ class Card extends React.Component {
           className="front"
           style={{ backgroundImage: `url(${this.props.image})` }}
         />
-        <div className="back" />
+        <div className="back">
+          <div className="imageBg">
+            <img
+              src="https://www.accodex.com/wp-content/uploads/2017/07/zendesk-logo-full-white.png"
+              className="zendeskImg"
+            />
+          </div>
+        </div>
       </div>
     );
   }
