@@ -7,7 +7,7 @@
 }
 
 .turnHeader {
-  font-size: 25px;
+  font-size: 22px;
   color: white;
   display: flex;
   justify-content: space-between;
@@ -41,7 +41,7 @@
 .winScreen {
   font-size: 50px;
   font-family: "Bangers", cursive;
-  border-radius: 0px 0px 5px 5px;
+  border-radius: 0px 0px 6px 6px;
   justify-content: center;
   text-align: center;
   display: flex;

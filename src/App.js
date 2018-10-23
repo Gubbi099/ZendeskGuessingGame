@@ -9,7 +9,6 @@ class App extends Component {
 
     const themes = ["cats", "cars", "nature", "city"];
     const theme = _.sample(themes);
-    console.log(theme);
 
     let cards = [];
     for (var i = 0; i < 7; i++) {
@@ -31,7 +30,8 @@ class App extends Component {
       cards: _.shuffle(allcards),
       theme: theme,
       currentSelectedCard: undefined,
-      turns: 0
+      turns: 0,
+      zoom: 0.85
     };
   }
 
@@ -114,10 +114,21 @@ class App extends Component {
   }
 
   render() {
+    console.log(this.state.zoom);
     return (
       <div className="App">
         <header className="turnHeader">
           <div>Turns: {this.state.turns} </div>
+          <input
+            value={this.state.zoom}
+            type="range"
+            step="0.0001"
+            min="0.3"
+            max="1.3"
+            onChange={evt => {
+              this.setState({ zoom: evt.target.value });
+            }}
+          />
           <div> Theme: {_.capitalize(this.state.theme)} </div>
         </header>
         {this.state.hasWon ? (
@@ -130,7 +141,7 @@ class App extends Component {
         ) : (
           ""
         )}
-        <div className="cards">
+        <div className="cards" style={{ zoom: this.state.zoom }}>
           {this.state.cards.map(card => {
             return (
               <Card
