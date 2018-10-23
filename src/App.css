@@ -7,16 +7,44 @@
 }
 
 .turnHeader {
+  color: white;
+  display: flex;
+  justify-content: space-between;
   box-shadow: 0 0 10px #000000;
   border-bottom: 4px solid rgb(150, 150, 150);
   width: 100%;
   padding: 20px;
+  z-index: 111;
   background: rgb(100, 100, 100);
 }
 
 .cards {
-  max-width: 1900px;
+  max-width: 2000px;
   display: flex;
   justify-content: center;
   flex-wrap: wrap;
+}
+
+.winScreen {
+  justify-content: center;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  position: absolute;
+  background: rgba(100, 100, 100, 0.95);
+  width: 600px;
+  height: 350px;
+  z-index: 100;
+  animation-name: slide-in;
+  animation-duration: 2s;
+  animation-fill-mode: forwards;
+}
+
+@keyframes slide-in {
+  from {
+    top: -350px;
+  }
+  to {
+    top: 62px;
+  }
 }

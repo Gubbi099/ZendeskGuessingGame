@@ -15,6 +15,7 @@ class Card extends React.Component {
             <img
               src="https://www.accodex.com/wp-content/uploads/2017/07/zendesk-logo-full-white.png"
               className="zendeskImg"
+              alt="Hmmmmmm"
             />
           </div>
         </div>

@@ -7,14 +7,18 @@ class App extends Component {
   constructor(props) {
     super(props);
 
+    const themes = ["animals", "cars", "nature", "city"];
+    const theme = _.sample(themes);
+    console.log(theme);
+
     let cards = [];
-    for (var i = 0; i < 6; i++) {
+    for (var i = 0; i < 7; i++) {
       cards = [
         ...cards,
         {
           pairid: i + 1,
           flipped: false,
-          imgUrl: `https://loremflickr.com/250/350/animals?lock=${i}/`
+          imgUrl: `https://loremflickr.com/220/220/${theme}?lock=${i}/`
         }
       ];
     }
@@ -23,14 +27,21 @@ class App extends Component {
       return { ...card, uniqueId: index };
     });
 
-    console.log(allcards);
-
     this.state = {
       cards: _.shuffle(allcards),
+      theme: theme,
       currentSelectedCard: undefined,
       turns: 0
     };
   }
+
+  hasWon = () => {
+    const isEveryCardFlipped = this.state.cards.every(card => {
+      return card.flipped;
+    });
+
+    this.setState({ hasWon: isEveryCardFlipped });
+  };
 
   reset = () => {
     this.setState({
@@ -50,7 +61,7 @@ class App extends Component {
         this.setState({
           isResetting: false
         });
-      }, 100);
+      }, 60);
     }, 1000);
   };
 
@@ -80,6 +91,7 @@ class App extends Component {
 
     if (currentSelectedCard !== undefined) {
       if (currentSelectedCard.pairid === clickedCard.pairid) {
+        // A pair was found!
         await this.updateCard(currentSelectedCard.uniqueId, {
           found: true,
           flipped: true
@@ -88,6 +100,8 @@ class App extends Component {
           found: true,
           flipped: true
         });
+
+        console.log(this.hasWon());
         this.reset();
       } else {
         this.reset();
@@ -102,7 +116,11 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        <header className="turnHeader">Turns used: {this.state.turns}</header>
+        <header className="turnHeader">
+          <div>Turns used: {this.state.turns} </div>{" "}
+          <div> Theme: {_.capitalize(this.state.theme)} </div>
+        </header>
+        {this.state.hasWon ? <div className="winScreen">You have won</div> : ""}
         <div className="cards">
           {this.state.cards.map(card => {
             return (
