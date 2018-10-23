@@ -7,17 +7,17 @@ class App extends Component {
   constructor(props) {
     super(props);
 
-    const themes = ["cats", "cars", "nature", "city"];
+    const themes = ["cats", "cars", "nature", "city", "zendesk"];
     const theme = _.sample(themes);
 
     let cards = [];
-    for (var i = 0; i < 7; i++) {
+    for (var i = 0; i < 2; i++) {
       cards = [
         ...cards,
         {
           pairid: i + 1,
           flipped: false,
-          imgUrl: `https://loremflickr.com/220/220/${theme}?lock=${i}/`
+          imgUrl: `https://loremflickr.com/220/220/${theme}?lock=${i + 7}/`
         }
       ];
     }
@@ -41,6 +41,15 @@ class App extends Component {
     });
 
     this.setState({ hasWon: isEveryCardFlipped });
+  };
+
+  endGame = () => {
+    this.setState({
+      hasWon: false,
+      cards: this.state.cards.map(card => ({ ...card, flipped: false }))
+    });
+
+    setTimeout(() => window.location.reload(), 600);
   };
 
   reset = () => {
@@ -80,7 +89,6 @@ class App extends Component {
   }
 
   async onCardClicked(clickedCard) {
-    console.log(this.state.turns);
     if (clickedCard.flipped || this.state.isResetting) {
       return;
     }
@@ -101,7 +109,7 @@ class App extends Component {
           flipped: true
         });
 
-        console.log(this.hasWon());
+        this.hasWon();
         this.reset();
       } else {
         this.reset();
@@ -114,7 +122,6 @@ class App extends Component {
   }
 
   render() {
-    console.log(this.state.zoom);
     return (
       <div className="App">
         <header className="turnHeader">
@@ -134,7 +141,7 @@ class App extends Component {
         {this.state.hasWon ? (
           <div className="winScreen">
             You won!
-            <button className="button" onClick={() => window.location.reload()}>
+            <button className="button" onClick={this.endGame}>
               Retry
             </button>
           </div>
