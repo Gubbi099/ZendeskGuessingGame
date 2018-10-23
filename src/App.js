@@ -9,7 +9,15 @@ class App extends Component {
 
     const CARD_COUNT = 10;
 
-    const themes = ["cats", "cars", "nature", "city", "zendesk"];
+    const themes = [
+      "cats",
+      "cars",
+      "nature",
+      "city",
+      "zendesk",
+      "thematrix",
+      "obama"
+    ];
     const theme = _.sample(themes);
 
     let cards = [];
@@ -33,8 +41,9 @@ class App extends Component {
       theme: theme,
       currentSelectedCard: undefined,
       turns: 0,
+      misses: 0,
       zoom: 0.85,
-      maxTurns: CARD_COUNT * 2
+      maxMisses: Math.round(CARD_COUNT * 1.5)
     };
   }
 
@@ -49,7 +58,7 @@ class App extends Component {
   };
 
   hasLost = () => {
-    const lost = this.state.turns >= this.state.maxTurns - 1;
+    const lost = this.state.misses >= this.state.maxMisses;
 
     this.setState({ hasLost: lost });
   };
@@ -77,11 +86,9 @@ class App extends Component {
         })
       });
 
-      setTimeout(() => {
-        this.setState({
-          isResetting: false
-        });
-      }, 60);
+      this.setState({
+        isResetting: false
+      });
     }, 1000);
   };
 
@@ -120,6 +127,7 @@ class App extends Component {
           found: true,
           flipped: true
         });
+
         await this.updateCard(clickedCard.uniqueId, {
           found: true,
           flipped: true
@@ -128,6 +136,7 @@ class App extends Component {
         this.hasWon() || this.hasLost();
         this.reset();
       } else {
+        this.setState({ misses: this.state.misses + 1 });
         this.hasLost();
         this.reset();
       }
@@ -142,8 +151,8 @@ class App extends Component {
     return (
       <div className="App">
         <header className="turnHeader">
-          <div>
-            Turns: {this.state.turns} / {this.state.maxTurns}
+          <div className="missed">
+            Missed: {this.state.misses} / {this.state.maxMisses}
           </div>
           <input
             value={this.state.zoom}
@@ -159,7 +168,12 @@ class App extends Component {
         </header>
         {(this.state.hasWon || this.state.hasLost) && (
           <div className="winScreen">
-            {this.state.hasWon && "You won!"}
+            {this.state.hasWon && (
+              <div>
+                <div>You won!</div>
+                <div className="winTurns">Turns: {this.state.turns}</div>
+              </div>
+            )}
             {this.state.hasLost && "You lost!"}
             <button className="button" onClick={this.endGame}>
               Retry

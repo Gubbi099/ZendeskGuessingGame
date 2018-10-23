@@ -23,7 +23,7 @@
 }
 .zendeskImg {
   width: 150px;
-  /* transform: scaleX(-1); */
+  pointer-events: none;
 }
 
 .imageBg {

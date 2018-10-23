@@ -7,6 +7,8 @@
 }
 
 .turnHeader {
+  font-weight: bold;
+  user-select: none;
   font-size: 22px;
   color: white;
   display: flex;
@@ -29,9 +31,27 @@
   transform: scaleX(-1);
 }
 
+.button:active {
+  background: rgb(110, 170, 110);
+  border-bottom-width: 2px;
+}
+
+.winTurns {
+  color: rgb(200, 200, 200);
+  margin-top: 8px;
+  font-size: 30px;
+}
+
 .button {
+  transition: border-bottom 0.1s, background 0.2s;
+  border: none;
+  border-bottom: 6px solid rgb(100, 140, 100);
+  color: rgb(255, 255, 255);
+  font-family: "Bangers", cursive;
+  font-size: 18px;
+  outline: none;
   cursor: pointer;
-  background: rgb(150, 150, 150);
+  background: rgb(120, 180, 120);
   margin-top: 20px;
   user-select: none;
   border-radius: 10px;
@@ -40,6 +60,8 @@
 }
 
 .winScreen {
+  color: rgb(255, 255, 255);
+  user-select: none;
   font-size: 50px;
   font-family: "Bangers", cursive;
   border-radius: 0px 0px 6px 6px;
