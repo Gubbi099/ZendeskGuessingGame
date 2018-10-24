@@ -59,6 +59,14 @@
   height: 50px;
 }
 
+.settings {
+  border-radius: 6px 6px 0px 0px;
+  margin-top: 1000px;
+  background: rgba(100, 100, 100, 0.95);
+  width: 400px;
+  height: 350px;
+}
+
 .winScreen {
   color: rgb(255, 255, 255);
   user-select: none;

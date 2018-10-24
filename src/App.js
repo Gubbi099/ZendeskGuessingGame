@@ -7,8 +7,14 @@ class App extends Component {
   constructor(props) {
     super(props);
 
-    const CARD_COUNT = 10;
+    this.state = {};
+  }
 
+  componentDidMount() {
+    this.generateDeck();
+  }
+
+  generateDeck = (settings = { zoom: 0.85, cardCount: 10 }) => {
     const themes = [
       "cats",
       "cars",
@@ -21,7 +27,7 @@ class App extends Component {
     const theme = _.sample(themes);
 
     let cards = [];
-    for (var i = 0; i < CARD_COUNT; i++) {
+    for (var i = 0; i < settings.cardCount; i++) {
       cards = [
         ...cards,
         {
@@ -36,16 +42,17 @@ class App extends Component {
       return { ...card, uniqueId: index };
     });
 
-    this.state = {
+    this.setState({
       cards: _.shuffle(allcards),
       theme: theme,
       currentSelectedCard: undefined,
+      cardCount: settings.cardCount,
       turns: 0,
       misses: 0,
-      zoom: 0.85,
-      maxMisses: Math.round(CARD_COUNT * 1.5)
-    };
-  }
+      zoom: settings.zoom,
+      maxMisses: Math.round(settings.cardCount * 1.5)
+    });
+  };
 
   hasWon = () => {
     const isEveryCardFlipped = this.state.cards.every(card => {
@@ -69,7 +76,7 @@ class App extends Component {
       cards: this.state.cards.map(card => ({ ...card, flipped: false }))
     });
 
-    setTimeout(() => window.location.reload(), 600);
+    setTimeout(() => this.generateDeck({ zoom: this.state.zoom }), 600);
   };
 
   reset = () => {
@@ -148,6 +155,8 @@ class App extends Component {
   }
 
   render() {
+    if (!this.state.cards) return null;
+
     return (
       <div className="App">
         <header className="turnHeader">
@@ -180,6 +189,19 @@ class App extends Component {
             </button>
           </div>
         )}
+        <div className="settings">
+          Settings{" "}
+          <input
+            value={this.state.cardCount}
+            type="range"
+            step="1"
+            min="4"
+            max="20"
+            onChange={evt => {
+              this.generateDeck({ cardCount: evt.target.value });
+            }}
+          />
+        </div>
         <div className="cards" style={{ zoom: this.state.zoom }}>
           {this.state.cards.map(card => {
             return (
