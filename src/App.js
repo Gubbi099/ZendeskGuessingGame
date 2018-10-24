@@ -14,7 +14,9 @@ class App extends Component {
     this.generateDeck();
   }
 
+  // The function that loads the game
   generateDeck = (settings = { zoom: 0.85, cardCount: 10 }) => {
+    // Themes
     const themes = [
       "cats",
       "cars",
@@ -38,10 +40,12 @@ class App extends Component {
       ];
     }
 
+    // Grabs all the cards
     const allcards = [...cards, ...cards].map((card, index) => {
       return { ...card, uniqueId: index };
     });
 
+    // All the states
     this.setState({
       cards: _.shuffle(allcards),
       theme: settings.theme || theme,
@@ -54,6 +58,7 @@ class App extends Component {
     });
   };
 
+  // Checks if all cards have flipped then sets hasWon to true
   hasWon = () => {
     const isEveryCardFlipped = this.state.cards.every(card => {
       return card.flipped;
@@ -64,15 +69,20 @@ class App extends Component {
     return isEveryCardFlipped;
   };
 
+  // Checks if the misses are higher that the maximum amount and if so then it will set the state to lost
   hasLost = () => {
     const lost = this.state.misses >= this.state.maxMisses;
 
     this.setState({ hasLost: lost });
+
+    return lost;
   };
 
+  // Ends the game
   endGame = () => {
     this.setState({
       hasWon: false,
+      hasLost: false,
       cards: this.state.cards.map(card => ({ ...card, flipped: false }))
     });
 
@@ -86,6 +96,7 @@ class App extends Component {
     );
   };
 
+  // Reset function
   reset = () => {
     this.setState({
       isResetting: true,
@@ -151,8 +162,8 @@ class App extends Component {
         this.reset();
       } else {
         this.setState({ misses: this.state.misses + 1 });
-        this.hasLost();
-        this.reset();
+        this.hasLost() || this.reset();
+        // this.reset();
       }
     } else {
       this.setState({
@@ -188,10 +199,10 @@ class App extends Component {
             </button>
           </div>
         )}
-
         <div
           className={"settings" + (this.state.settingsIsOpen ? " is-open" : "")}
         >
+          <div className="settingsTitle">Settings</div>
           <div className="settingcontrol">
             Card Amount:
             <input
@@ -221,6 +232,7 @@ class App extends Component {
               }}
             />
           </div>
+          <button className="applysettings">Apply</button>
           <div
             className="settingsButton"
             onClick={() => {
@@ -236,7 +248,6 @@ class App extends Component {
             </div>
           </div>
         </div>
-
         <div className="cards" style={{ zoom: this.state.zoom }}>
           {this.state.cards.map(card => {
             return (
