@@ -76,7 +76,14 @@ class App extends Component {
       cards: this.state.cards.map(card => ({ ...card, flipped: false }))
     });
 
-    setTimeout(() => this.generateDeck({ zoom: this.state.zoom }), 600);
+    setTimeout(
+      () =>
+        this.generateDeck({
+          zoom: this.state.zoom,
+          cardCount: this.state.cardCount
+        }),
+      600
+    );
   };
 
   reset = () => {
@@ -163,21 +170,7 @@ class App extends Component {
           <div className="missed">
             　　Missed: {this.state.misses} / {this.state.maxMisses}
           </div>
-          <input
-            value={this.state.zoom}
-            type="range"
-            step="0.0001"
-            min="0.3"
-            max="1.3"
-            onChange={evt => {
-              this.setState({ zoom: evt.target.value });
-            }}
-          />
-          <div>
-            {" "}
-            Theme: {_.capitalize(this.state.theme)}
-            　　{" "}
-          </div>
+          <div>Theme: {_.capitalize(this.state.theme)}</div>
         </header>
         {(this.state.hasWon || this.state.hasLost) && (
           <div className="winScreen">
@@ -193,29 +186,52 @@ class App extends Component {
             </button>
           </div>
         )}
-        <div className="settings">
-          Settings{" "}
-          <input
-            value={this.state.cardCount}
-            type="range"
-            step="1"
-            min="4"
-            max="20"
-            onChange={evt => {
-              this.generateDeck({ cardCount: evt.target.value });
+
+        <div
+          className={"settings" + (this.state.settingsIsOpen ? " is-open" : "")}
+        >
+          <div className="settingcontrol">
+            Card Amount:
+            <input
+              value={this.state.cardCount}
+              type="range"
+              step="1"
+              min="1"
+              max="20"
+              onChange={evt => {
+                this.generateDeck({ cardCount: evt.target.value });
+              }}
+            />
+          </div>
+          <div className="settingcontrol">
+            Zoom Amount:
+            <input
+              value={this.state.zoom}
+              type="range"
+              step="0.0001"
+              min="0.3"
+              max="1.3"
+              onChange={evt => {
+                this.setState({ zoom: evt.target.value });
+              }}
+            />
+          </div>
+          <div
+            className="settingsButton"
+            onClick={() => {
+              this.setState({ settingsIsOpen: !this.state.settingsIsOpen });
             }}
-          />
-          <div className="settingsButton">
-            {" "}
+          >
             <div className="logoBG">
               <img
                 src="http://www.myiconfinder.com/uploads/iconsets/256-256-173468ecd27f5f440772862738d18473-gear.png"
                 className="settingsIcon"
                 alt="setting"
-              />{" "}
+              />
             </div>
           </div>
         </div>
+
         <div className="cards" style={{ zoom: this.state.zoom }}>
           {this.state.cards.map(card => {
             return (

@@ -22,6 +22,11 @@
   background: rgb(100, 100, 100);
 }
 
+.settingcontrol {
+  padding: 20px;
+  display: flex;
+}
+
 .settingsButton {
   cursor: pointer;
   border-radius: 40px 40px 0px 0px;
@@ -31,12 +36,13 @@
   height: 0px;
   width: 125px;
   margin-left: 100px;
-  margin-top: 350px;
   -moz-transform: scale(1, -1);
   -webkit-transform: scale(1, -1);
   -o-transform: scale(1, -1);
   -ms-transform: scale(1, -1);
   transform: scale(1, -1);
+  top: 390px;
+  position: absolute;
 }
 
 .settingsIcon {
@@ -88,7 +94,7 @@
 .settings {
   padding: 20px;
   text-align: left;
-  top: -350px;
+  top: -320px;
   left: 20px;
   position: fixed;
   border-radius: 0px 0px 6px 6px;
@@ -96,9 +102,11 @@
   background: rgba(100, 100, 100, 0.95);
   width: 400px;
   height: 350px;
-  animation-name: slide-in;
-  animation-duration: 1s;
-  animation-fill-mode: forwards;
+  transition: top 0.3s;
+}
+
+.settings.is-open {
+  top: 70px;
 }
 
 .winScreen {
