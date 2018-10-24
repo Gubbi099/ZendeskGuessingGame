@@ -161,7 +161,7 @@ class App extends Component {
       <div className="App">
         <header className="turnHeader">
           <div className="missed">
-            Missed: {this.state.misses} / {this.state.maxMisses}
+            　　Missed: {this.state.misses} / {this.state.maxMisses}
           </div>
           <input
             value={this.state.zoom}
@@ -173,7 +173,11 @@ class App extends Component {
               this.setState({ zoom: evt.target.value });
             }}
           />
-          <div> Theme: {_.capitalize(this.state.theme)} </div>
+          <div>
+            {" "}
+            Theme: {_.capitalize(this.state.theme)}
+            　　{" "}
+          </div>
         </header>
         {(this.state.hasWon || this.state.hasLost) && (
           <div className="winScreen">
@@ -201,6 +205,16 @@ class App extends Component {
               this.generateDeck({ cardCount: evt.target.value });
             }}
           />
+          <div className="settingsButton">
+            {" "}
+            <div className="logoBG">
+              <img
+                src="http://www.myiconfinder.com/uploads/iconsets/256-256-173468ecd27f5f440772862738d18473-gear.png"
+                className="settingsIcon"
+                alt="setting"
+              />{" "}
+            </div>
+          </div>
         </div>
         <div className="cards" style={{ zoom: this.state.zoom }}>
           {this.state.cards.map(card => {
