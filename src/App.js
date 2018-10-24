@@ -209,15 +209,13 @@ class App extends Component {
               value={this.state.cardCount}
               type="range"
               step="1"
-              min="1"
+              min="5"
               max="20"
               onChange={evt => {
-                this.generateDeck({
-                  cardCount: evt.target.value,
-                  theme: this.state.theme
-                });
+                this.setState({ cardCount: evt.target.value });
               }}
             />
+            {this.state.cardCount * 2}
           </div>
           <div className="settingcontrol">
             Zoom Amount:
@@ -232,7 +230,17 @@ class App extends Component {
               }}
             />
           </div>
-          <button className="applysettings">Apply</button>
+          <button
+            className="applysettings"
+            onClick={() =>
+              this.generateDeck({
+                cardCount: this.state.cardCount,
+                theme: this.state.theme
+              })
+            }
+          >
+            Apply
+          </button>
           <div
             className="settingsButton"
             onClick={() => {
