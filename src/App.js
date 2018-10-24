@@ -44,7 +44,7 @@ class App extends Component {
 
     this.setState({
       cards: _.shuffle(allcards),
-      theme: theme,
+      theme: settings.theme || theme,
       currentSelectedCard: undefined,
       cardCount: settings.cardCount,
       turns: 0,
@@ -166,11 +166,13 @@ class App extends Component {
 
     return (
       <div className="App">
-        <header className="turnHeader">
-          <div className="missed">
-            　　Missed: {this.state.misses} / {this.state.maxMisses}
+        <header className="header">
+          <div className="innerHeader">
+            <div className="missed">
+              Missed: {this.state.misses} / {this.state.maxMisses}
+            </div>
+            <div>Theme: {_.capitalize(this.state.theme)}</div>
           </div>
-          <div>Theme: {_.capitalize(this.state.theme)}</div>
         </header>
         {(this.state.hasWon || this.state.hasLost) && (
           <div className="winScreen">
@@ -199,7 +201,10 @@ class App extends Component {
               min="1"
               max="20"
               onChange={evt => {
-                this.generateDeck({ cardCount: evt.target.value });
+                this.generateDeck({
+                  cardCount: evt.target.value,
+                  theme: this.state.theme
+                });
               }}
             />
           </div>

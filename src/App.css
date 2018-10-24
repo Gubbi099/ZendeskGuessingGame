@@ -6,20 +6,34 @@
   margin: auto;
 }
 
-.turnHeader {
+.header {
   position: fixed;
   font-weight: bold;
   user-select: none;
   font-size: 22px;
   color: white;
   display: flex;
-  justify-content: space-between;
+  border-bottom: 5px solid transparent;
+  border-image: linear-gradient(
+    to bottom right,
+    #b827fc 0%,
+    #2c90fc 25%,
+    #b8fd33 50%,
+    #fec837 75%,
+    #fd1892 100%
+  );
+  border-image-slice: 1;
   box-shadow: 0 0 10px #000000;
-  border-bottom: 4px solid rgb(150, 150, 150);
   width: 100%;
-  padding: 20px;
   z-index: 111;
   background: rgb(100, 100, 100);
+}
+
+.header .innerHeader {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  padding: 20px;
 }
 
 .settingcontrol {
