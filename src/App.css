@@ -54,12 +54,16 @@
   margin-top: 20px;
   margin-left: 20px;
   margin-bottom: 20px;
+  width: 200px;
+  text-align: left;
 }
 
 .themeHeader {
+  width: 200px;
   margin-top: 20px;
   margin-right: 20px;
   margin-bottom: 20px;
+  text-align: right;
 }
 
 .websiteTitle {
