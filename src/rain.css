@@ -1,0 +1,96 @@
+.thunderContainer {
+  width: 100%;
+  height: 100%;
+
+  position: fixed;
+  top: 0;
+  background-image: url("https://ak0.picdn.net/shutterstock/videos/246010/thumb/3.jpg");
+  background-color: #222;
+  background-size: cover;
+  background-position: 0 0;
+  background-repeat: no-repeat;
+  z-index: 0;
+  opacity: 0;
+  transition: opacity 3s;
+}
+
+.thunderContainer.show {
+  opacity: 1;
+}
+
+.thunderContainer::after {
+  content: "";
+  height: 100%;
+  width: 100%;
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 1;
+  animation: thunder-bg 6s infinite;
+}
+
+.thunder {
+  position: relative;
+}
+
+#canvas3 {
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 5;
+}
+
+#canvas2 {
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 10;
+}
+
+#canvas1 {
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 100;
+}
+
+$color1: rgba(34, 34, 34, 0.9);
+$color2: rgba(59, 59, 59, 0.3);
+.thunder {
+  @at-root {
+    @-webkit-keyframes thunder-bg {
+      0% {
+        background-color: $color1;
+      }
+      9% {
+        background-color: $color1;
+      }
+      10% {
+        background-color: $color2;
+      }
+      10.5% {
+        background-color: $color1;
+      }
+      80% {
+        background-color: $color1;
+      }
+      82% {
+        background-color: $color2;
+      }
+      83% {
+        background-color: $color1;
+      }
+      83.5% {
+        background-color: $color2;
+      }
+      100% {
+        background-color: $color1;
+      }
+    }
+  }
+}

@@ -3,6 +3,7 @@ import "./App.css";
 import Card from "./Card.js";
 import _ from "lodash";
 import { startConfetti, stopConfetti } from "./confetti.js";
+import { startRain, stopRain } from "./rain.js";
 
 class App extends Component {
   constructor(props) {
@@ -78,12 +79,20 @@ class App extends Component {
 
     this.setState({ hasLost: lost });
 
+    if (lost) {
+      startRain();
+    }
+
     return lost;
   };
 
   // Ends the game
   endGame = () => {
-    stopConfetti();
+    if (this.state.hasWon) {
+      stopConfetti();
+    } else {
+      stopRain();
+    }
     this.setState({
       hasWon: false,
       hasLost: false,
@@ -239,7 +248,8 @@ class App extends Component {
             onClick={() =>
               this.generateDeck({
                 cardCount: this.state.cardCount,
-                theme: this.state.theme
+                theme: this.state.theme,
+                zoom: this.state.zoom
               })
             }
           >

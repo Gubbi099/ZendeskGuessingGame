@@ -1,0 +1,12 @@
+.confetti {
+  pointer-events: none;
+  z-index: 999;
+  position: absolute;
+  top: 0;
+  opacity: 1;
+  transition: opacity 0.5s;
+}
+
+.confetti.removed {
+  opacity: 0;
+}

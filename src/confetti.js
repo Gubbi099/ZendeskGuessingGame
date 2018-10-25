@@ -1,3 +1,5 @@
+import "./confetti.css";
+
 export const startConfetti = () => {
   let W = window.innerWidth;
   let H = window.innerHeight;
