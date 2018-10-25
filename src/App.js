@@ -253,7 +253,7 @@ class App extends Component {
             <div className="settingcontrol">
               Theme
               <input
-                maxLength="15"
+                maxLength="9"
                 className="textBox"
                 type="text"
                 value={this.state.theme}
