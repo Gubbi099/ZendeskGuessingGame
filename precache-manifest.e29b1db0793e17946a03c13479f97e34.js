@@ -16,7 +16,7 @@ self.__precacheManifest = [
     "url": "/ZendeskGuessingGame/static/css/main.f224c667.chunk.css"
   },
   {
-    "revision": "7826ade3c4f2791c9ea5e1816f8ecc49",
+    "revision": "b2ebf15d008dc04dd10780d11eb82a2c",
     "url": "/ZendeskGuessingGame/index.html"
   }
 ];
