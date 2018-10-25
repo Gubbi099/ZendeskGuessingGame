@@ -37,8 +37,7 @@ class App extends Component {
         {
           pairid: i + 1,
           flipped: false,
-          imgUrl: `https://loremflickr.com/220/220/${currentTheme}?lock=${i +
-            10}/`
+          imgUrl: `https://loremflickr.com/220/220/${currentTheme}?lock=${i}/`
         }
       ];
     }
