@@ -25,7 +25,7 @@ class App extends Component {
       "nature",
       "city",
       "zendesk",
-      "thematrix",
+      "supreme",
       "obama"
     ];
     const currentTheme = settings.theme || _.sample(themes);
@@ -192,10 +192,13 @@ class App extends Component {
       <div className="App">
         <header className="header">
           <div className="innerHeader">
-            <div className="missed">
+            <div className="missedHeader">
               Missed: {this.state.misses} / {this.state.maxMisses}
             </div>
-            <div>Theme: {_.capitalize(this.state.theme)}</div>
+            <div className="websiteTitle">ZENGUESS</div>
+            <div className="themeHeader">
+              Theme: {_.capitalize(this.state.theme)}
+            </div>
           </div>
           <div className="gradient" />
         </header>

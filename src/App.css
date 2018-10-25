@@ -50,6 +50,25 @@
   background: rgb(100, 100, 100);
 }
 
+.missedHeader {
+  margin-top: 20px;
+  margin-left: 20px;
+  margin-bottom: 20px;
+}
+
+.themeHeader {
+  margin-top: 20px;
+  margin-right: 20px;
+  margin-bottom: 20px;
+}
+
+.websiteTitle {
+  display: flex;
+  margin-top: 12px;
+  font-size: 32px;
+  font-family: "Bungee Inline";
+}
+
 .gradient {
   height: 5px;
   width: 100%;
@@ -82,7 +101,6 @@
 .header .innerHeader {
   display: flex;
   justify-content: space-between;
-  padding: 20px;
 }
 
 .settingcontrol {
