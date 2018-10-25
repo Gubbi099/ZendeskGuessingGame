@@ -63,6 +63,8 @@
 }
 
 .websiteTitle {
+  left: 45%;
+  position: fixed;
   display: flex;
   margin-top: 12px;
   font-size: 32px;
