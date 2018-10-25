@@ -287,19 +287,21 @@ class App extends Component {
             </div>
           </div>
         </div>
-        <div className="cards" style={{ zoom: this.state.zoom }}>
-          {this.state.cards.map(card => {
-            return (
-              <Card
-                key={card.uniqueId}
-                onClick={() => {
-                  this.onCardClicked(card);
-                }}
-                flipped={card.flipped}
-                image={card.imgUrl}
-              />
-            );
-          })}
+        <div className="cardsWrapper">
+          <div className="cards" style={{ zoom: this.state.zoom }}>
+            {this.state.cards.map(card => {
+              return (
+                <Card
+                  key={card.uniqueId}
+                  onClick={() => {
+                    this.onCardClicked(card);
+                  }}
+                  flipped={card.flipped}
+                  image={card.imgUrl}
+                />
+              );
+            })}
+          </div>
         </div>
       </div>
     );

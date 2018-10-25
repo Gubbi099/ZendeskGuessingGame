@@ -124,7 +124,6 @@
 
 .cards {
   height: 100%;
-  margin-top: 120px;
   max-width: 2000px;
   display: flex;
   justify-content: center;
@@ -135,6 +134,10 @@
 .button:active {
   background: rgb(110, 170, 110);
   border-bottom-width: 2px;
+}
+
+.cardsWrapper {
+  margin-top: 120px;
 }
 
 .winTurns {
