@@ -197,6 +197,7 @@ class App extends Component {
             </div>
             <div>Theme: {_.capitalize(this.state.theme)}</div>
           </div>
+          <div className="gradient" />
         </header>
         {(this.state.hasWon || this.state.hasLost) && (
           <div className="winScreen">

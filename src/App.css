@@ -43,26 +43,45 @@
   font-size: 22px;
   color: white;
   display: flex;
-  border-bottom: 5px solid transparent;
-  border-image: linear-gradient(
-    to bottom right,
-    #b827fc 0%,
-    #2c90fc 25%,
-    #b8fd33 50%,
-    #fec837 75%,
-    #fd1892 100%
-  );
-  border-image-slice: 1;
+  flex-direction: column;
   box-shadow: 0 0 10px #000000;
   width: 100%;
   z-index: 111;
   background: rgb(100, 100, 100);
 }
 
+.gradient {
+  height: 5px;
+  width: 100%;
+  background: #30ff90;
+  animation: rotate 2s infinite linear;
+
+  /* IE10+ */
+  background: linear-gradient(
+    to right,
+    rgba(48, 255, 144, 1) 0%,
+    rgba(237, 45, 237, 1) 25%,
+    rgba(201, 152, 38, 1) 50%,
+    rgba(48, 255, 230, 1) 75%,
+    rgba(48, 255, 144, 1) 100%
+  );
+  /* W3C */
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#30ff90', endColorstr='#30ff90',GradientType=1);
+  /* IE6-9 */
+}
+
+@keyframes rotate {
+  from {
+    background-position: -100vw;
+  }
+  to {
+    background-position: 0vw;
+  }
+}
+
 .header .innerHeader {
   display: flex;
   justify-content: space-between;
-  width: 100%;
   padding: 20px;
 }
 
