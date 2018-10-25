@@ -217,9 +217,10 @@ class App extends Component {
         >
           <div className="settingsTitle">Settings</div>
           <div className="settingcontrol">
-            Card Amount:
+            Card Amount
             <input
               value={this.state.cardCount}
+              class="slider"
               type="range"
               step="1"
               min="5"
@@ -231,9 +232,10 @@ class App extends Component {
             <div className="settingCount"> {this.state.cardCount * 2} </div>
           </div>
           <div className="settingcontrol">
-            Zoom Amount:
+            Zoom Amount
             <input
               value={this.state.zoom}
+              class="slider"
               type="range"
               step="0.0001"
               min="0.3"
