@@ -25,7 +25,7 @@ class App extends Component {
       "nature",
       "city",
       "zendesk",
-      "supreme",
+      "trump",
       "obama"
     ];
     const currentTheme = settings.theme || _.sample(themes);
@@ -210,7 +210,7 @@ class App extends Component {
                 <div className="winTurns">Turns: {this.state.turns}</div>
               </div>
             )}
-            {this.state.hasLost && "You lost!"}
+            {this.state.hasLost && "You lose"}
             <button className="button" onClick={this.endGame}>
               Retry
             </button>
@@ -264,13 +264,14 @@ class App extends Component {
             </div>
             <button
               className="applysettings"
-              onClick={() =>
+              onClick={() => {
+                this.setState({ settingsIsOpen: !this.state.settingsIsOpen });
                 this.generateDeck({
                   cardCount: this.state.cardCount,
                   theme: this.state.theme,
                   zoom: this.state.zoom
-                })
-              }
+                });
+              }}
             >
               Apply
             </button>
