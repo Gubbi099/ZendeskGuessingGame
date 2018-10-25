@@ -37,14 +37,14 @@
 }
 
 .settingcontrol {
+  justify-content: center;
   color: rgba(255, 255, 255, 0.9);
   padding: 20px;
-  display: flex;
+  display: inline-grid;
 }
 
 .settingsTitle {
   padding: 20px;
-  margin-left: 80px;
   font-size: 60px;
   color: rgb(255, 255, 255);
   font-family: "Bangers", cursive;
@@ -68,12 +68,29 @@
   position: absolute;
 }
 
+.settingCount {
+  padding: 10px;
+  font-family: "Fredoka One";
+}
+
 .settingsIcon {
   pointer-events: none;
   user-select: none;
-  margin-left: 40px;
   margin-top: 5px;
   width: 40px;
+}
+
+.confetti {
+  pointer-events: none;
+  z-index: 999;
+  position: absolute;
+  top: 0;
+  opacity: 1;
+  transition: opacity 0.5s;
+}
+
+.confetti.removed {
+  opacity: 0;
 }
 
 .cards {
@@ -137,8 +154,10 @@
 }
 
 .settings {
+  user-select: none;
+  font-family: "Fredoka One";
   padding: 20px;
-  text-align: left;
+  text-align: center;
   top: -320px;
   left: 20px;
   position: fixed;

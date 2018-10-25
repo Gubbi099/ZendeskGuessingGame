@@ -1,5 +1,6 @@
 import React from "react";
 import "./Card.css";
+import bglogo from "./zenlogo.png";
 
 class Card extends React.Component {
   constructor(props) {
@@ -23,13 +24,10 @@ class Card extends React.Component {
           className="front"
           style={{ backgroundImage: `url(${this.props.image})` }}
         />
+
         <div className="back">
           <div className="imageBg">
-            <img
-              src="https://www.accodex.com/wp-content/uploads/2017/07/zendesk-logo-full-white.png"
-              className="zendeskImg"
-              alt="Hmmmmmm"
-            />
+            <img src={bglogo} className="zendeskImg" alt="Hmmmmmm" />
           </div>
         </div>
       </div>

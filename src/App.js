@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import "./App.css";
 import Card from "./Card.js";
 import _ from "lodash";
+import { startConfetti, stopConfetti } from "./confetti.js";
 
 class App extends Component {
   constructor(props) {
@@ -65,7 +66,9 @@ class App extends Component {
     });
 
     this.setState({ hasWon: isEveryCardFlipped });
-
+    if (isEveryCardFlipped) {
+      startConfetti();
+    }
     return isEveryCardFlipped;
   };
 
@@ -80,6 +83,7 @@ class App extends Component {
 
   // Ends the game
   endGame = () => {
+    stopConfetti();
     this.setState({
       hasWon: false,
       hasLost: false,
@@ -215,7 +219,7 @@ class App extends Component {
                 this.setState({ cardCount: evt.target.value });
               }}
             />
-            {this.state.cardCount * 2}
+            <div className="settingCount"> {this.state.cardCount * 2} </div>
           </div>
           <div className="settingcontrol">
             Zoom Amount:
