@@ -28,7 +28,7 @@ class App extends Component {
       "thematrix",
       "obama"
     ];
-    const theme = _.sample(themes);
+    const currentTheme = settings.theme || _.sample(themes);
 
     let cards = [];
     for (var i = 0; i < settings.cardCount; i++) {
@@ -37,7 +37,8 @@ class App extends Component {
         {
           pairid: i + 1,
           flipped: false,
-          imgUrl: `https://loremflickr.com/220/220/${theme}?lock=${i + 10}/`
+          imgUrl: `https://loremflickr.com/220/220/${currentTheme}?lock=${i +
+            10}/`
         }
       ];
     }
@@ -50,7 +51,7 @@ class App extends Component {
     // All the states
     this.setState({
       cards: _.shuffle(allcards),
-      theme: settings.theme || theme,
+      theme: currentTheme,
       currentSelectedCard: undefined,
       cardCount: settings.cardCount,
       turns: 0,
@@ -215,48 +216,62 @@ class App extends Component {
         <div
           className={"settings" + (this.state.settingsIsOpen ? " is-open" : "")}
         >
-          <div className="settingsTitle">Settings</div>
-          <div className="settingcontrol">
-            Card Amount
-            <input
-              value={this.state.cardCount}
-              class="slider"
-              type="range"
-              step="1"
-              min="5"
-              max="20"
-              onChange={evt => {
-                this.setState({ cardCount: evt.target.value });
-              }}
-            />
-            <div className="settingCount"> {this.state.cardCount * 2} </div>
+          <div className="settingsBackground">
+            <div className="settingsTitle">Settings</div>
+            <div className="settingcontrol">
+              Card Amount
+              <input
+                value={this.state.cardCount}
+                className="slider"
+                type="range"
+                step="1"
+                min="5"
+                max="20"
+                onChange={evt => {
+                  this.setState({ cardCount: evt.target.value });
+                }}
+              />
+              <div className="settingCount"> {this.state.cardCount * 2} </div>
+            </div>
+            <div className="settingcontrol">
+              Zoom Amount
+              <input
+                value={this.state.zoom}
+                className="slider"
+                type="range"
+                step="0.0001"
+                min="0.3"
+                max="1.3"
+                onChange={evt => {
+                  this.setState({ zoom: evt.target.value });
+                }}
+              />
+            </div>
+            <div className="settingcontrol">
+              Theme
+              <input
+                maxlength="15"
+                className="textBox"
+                type="text"
+                value={this.state.theme}
+                onChange={evt => {
+                  this.setState({ theme: evt.target.value });
+                }}
+              />
+            </div>
+            <button
+              className="applysettings"
+              onClick={() =>
+                this.generateDeck({
+                  cardCount: this.state.cardCount,
+                  theme: this.state.theme,
+                  zoom: this.state.zoom
+                })
+              }
+            >
+              Apply
+            </button>
           </div>
-          <div className="settingcontrol">
-            Zoom Amount
-            <input
-              value={this.state.zoom}
-              class="slider"
-              type="range"
-              step="0.0001"
-              min="0.3"
-              max="1.3"
-              onChange={evt => {
-                this.setState({ zoom: evt.target.value });
-              }}
-            />
-          </div>
-          <button
-            className="applysettings"
-            onClick={() =>
-              this.generateDeck({
-                cardCount: this.state.cardCount,
-                theme: this.state.theme,
-                zoom: this.state.zoom
-              })
-            }
-          >
-            Apply
-          </button>
           <div
             className="settingsButton"
             onClick={() => {
