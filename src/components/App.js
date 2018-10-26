@@ -5,7 +5,7 @@ import Timer from "./Timer.js";
 import _ from "lodash";
 import { startConfetti, stopConfetti } from "../confetti.js";
 import { startRain, stopRain } from "../rain.js";
-import { startTimer, getElapsedTime } from "../timer.js";
+import { startTimer, stopTimer, getElapsedTime, resetTimer } from "../timer.js";
 
 class App extends Component {
   constructor(props) {
@@ -18,12 +18,12 @@ class App extends Component {
     window.setInterval(() => {
       this.setState({ elapsedTime: getElapsedTime() });
     }, 1000);
+
     this.generateDeck();
   }
 
   // The function that loads the game
-  generateDeck = (settings = { zoom: 0.85, cardCount: 10 }) => {
-    startTimer();
+  generateDeck = (settings = { zoom: 0.85, cardCount: 1 }) => {
     // Themes
     const themes = [
       "cats",
@@ -75,6 +75,7 @@ class App extends Component {
     this.setState({ hasWon: isEveryCardFlipped });
     if (isEveryCardFlipped) {
       startConfetti();
+      stopTimer();
     }
     return isEveryCardFlipped;
   };
@@ -87,6 +88,7 @@ class App extends Component {
 
     if (lost) {
       startRain();
+      stopTimer();
     }
 
     return lost;
@@ -99,6 +101,8 @@ class App extends Component {
     } else {
       stopRain();
     }
+    resetTimer();
+
     this.setState({
       hasWon: false,
       hasLost: false,
@@ -162,6 +166,11 @@ class App extends Component {
 
     const { currentSelectedCard } = this.state;
 
+    if (this.state.turns === 0 && !currentSelectedCard) {
+      startTimer();
+      this.setState({ elapsedTime: getElapsedTime() });
+    }
+
     await this.updateCard(clickedCard.uniqueId, { flipped: true });
 
     if (currentSelectedCard !== undefined) {
@@ -195,11 +204,14 @@ class App extends Component {
 
     return (
       <div className="App">
+        <div className="timerContainer">
+          <div className="gradient" />
+          <Timer time={this.state.elapsedTime} />
+        </div>
         <header className="header">
           <div className="innerHeader">
             <div className="missedHeader">
               Missed: {this.state.misses} / {this.state.maxMisses}{" "}
-              <Timer time={this.state.elapsedTime} />
             </div>
             <div className="websiteTitle">ZENGUESS</div>
             <div className="themeHeader">
@@ -214,6 +226,9 @@ class App extends Component {
               <div>
                 <div>You win!</div>
                 <div className="winTurns">Turns: {this.state.turns}</div>
+                <div className="winTurns">
+                  Time: <Timer time={this.state.elapsedTime} />
+                </div>
               </div>
             )}
             {this.state.hasLost && "You lose"}
