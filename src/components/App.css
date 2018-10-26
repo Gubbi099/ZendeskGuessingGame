@@ -180,6 +180,10 @@
   margin-top: 120px;
 }
 
+.winTurns > * {
+  padding: 0px 10px;
+}
+
 .winTurns {
   color: rgb(200, 200, 200);
   margin-top: 8px;
