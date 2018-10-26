@@ -23,7 +23,7 @@ class App extends Component {
   }
 
   // The function that loads the game
-  generateDeck = (settings = { zoom: 0.85, cardCount: 1 }) => {
+  generateDeck = (settings = { zoom: 0.85, cardCount: 10 }) => {
     // Themes
     const themes = [
       "cats",
@@ -274,7 +274,7 @@ class App extends Component {
             <div className="settingcontrol">
               Theme
               <input
-                maxLength="9"
+                maxLength="13"
                 className="textBox"
                 type="text"
                 value={this.state.theme}

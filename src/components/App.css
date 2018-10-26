@@ -38,7 +38,7 @@
 
 .header {
   position: fixed;
-  font-weight: bold;
+  font-family: "Fredoka One";
   user-select: none;
   font-size: 22px;
   color: white;
@@ -54,12 +54,12 @@
   margin-top: 20px;
   margin-left: 20px;
   margin-bottom: 20px;
-  width: 200px;
+  width: 250px;
   text-align: left;
 }
 
 .themeHeader {
-  width: 200px;
+  width: 250px;
   margin-top: 20px;
   margin-right: 20px;
   margin-bottom: 20px;
