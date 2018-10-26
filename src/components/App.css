@@ -265,7 +265,7 @@
   position: fixed;
   z-index: 100;
   width: 400px;
-  transition: top 0.3s;
+  transition: top 0.8s;
 }
 
 .settings.is-open {
