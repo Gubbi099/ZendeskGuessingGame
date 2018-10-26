@@ -1,9 +1,11 @@
 import React, { Component } from "react";
 import "./App.css";
 import Card from "./Card.js";
+import Timer from "./Timer.js";
 import _ from "lodash";
-import { startConfetti, stopConfetti } from "./confetti.js";
-import { startRain, stopRain } from "./rain.js";
+import { startConfetti, stopConfetti } from "../confetti.js";
+import { startRain, stopRain } from "../rain.js";
+import { startTimer, getElapsedTime } from "../timer.js";
 
 class App extends Component {
   constructor(props) {
@@ -13,11 +15,15 @@ class App extends Component {
   }
 
   componentDidMount() {
+    window.setInterval(() => {
+      this.setState({ elapsedTime: getElapsedTime() });
+    }, 1000);
     this.generateDeck();
   }
 
   // The function that loads the game
   generateDeck = (settings = { zoom: 0.85, cardCount: 10 }) => {
+    startTimer();
     // Themes
     const themes = [
       "cats",
@@ -176,7 +182,6 @@ class App extends Component {
       } else {
         this.setState({ misses: this.state.misses + 1 });
         this.hasLost() || this.reset();
-        // this.reset();
       }
     } else {
       this.setState({
@@ -193,7 +198,8 @@ class App extends Component {
         <header className="header">
           <div className="innerHeader">
             <div className="missedHeader">
-              Missed: {this.state.misses} / {this.state.maxMisses}
+              Missed: {this.state.misses} / {this.state.maxMisses}{" "}
+              <Timer time={this.state.elapsedTime} />
             </div>
             <div className="websiteTitle">ZENGUESS</div>
             <div className="themeHeader">

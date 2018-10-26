@@ -1,6 +1,6 @@
 import React from "react";
 import "./Card.css";
-import bglogo from "./zenlogo.png";
+import bglogo from "../zenlogo.png";
 
 class Card extends React.Component {
   constructor(props) {
