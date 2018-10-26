@@ -206,7 +206,7 @@ class App extends Component {
           <div className="winScreen">
             {this.state.hasWon && (
               <div>
-                <div>You won!</div>
+                <div>You win!</div>
                 <div className="winTurns">Turns: {this.state.turns}</div>
               </div>
             )}
