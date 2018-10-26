@@ -203,7 +203,7 @@
   font-family: "Fredoka One";
   bottom: 0px;
   background: rgb(100, 100, 100);
-  position: absolute;
+  position: fixed;
   padding: 0px 0px 20px 0px;
 }
 
