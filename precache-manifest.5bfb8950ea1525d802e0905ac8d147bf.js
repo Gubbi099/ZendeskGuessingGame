@@ -4,19 +4,19 @@ self.__precacheManifest = [
     "url": "/ZendeskGuessingGame/static/js/runtime~main.159dae69.js"
   },
   {
-    "revision": "b98e94aff7969e738238",
-    "url": "/ZendeskGuessingGame/static/js/main.b98e94af.chunk.js"
+    "revision": "f2db684c0f3917322151",
+    "url": "/ZendeskGuessingGame/static/js/main.f2db684c.chunk.js"
   },
   {
     "revision": "ca8375330bcb385fa6a1",
     "url": "/ZendeskGuessingGame/static/js/1.ca837533.chunk.js"
   },
   {
-    "revision": "b98e94aff7969e738238",
-    "url": "/ZendeskGuessingGame/static/css/main.5628eaed.chunk.css"
+    "revision": "f2db684c0f3917322151",
+    "url": "/ZendeskGuessingGame/static/css/main.7cb5a082.chunk.css"
   },
   {
-    "revision": "c2da0695d1dd3ede4da0354350405926",
+    "revision": "319ad3f6f5288944fb6b1df3eaeb98b6",
     "url": "/ZendeskGuessingGame/index.html"
   }
 ];
