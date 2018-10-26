@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/3.6.2/workbox-sw.js");
 
 importScripts(
-  "/ZendeskGuessingGame/precache-manifest.3aa1bf92be012b9bd8e746a0fa16ae3b.js"
+  "/ZendeskGuessingGame/precache-manifest.a372bbce913deca3841b8ea47795e114.js"
 );
 
 workbox.clientsClaim();
